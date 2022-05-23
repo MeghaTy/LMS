@@ -1,8 +1,7 @@
 package com.te.lmsproject.customexception;
 
-public class DataViolationException extends Exception {
+public class DataViolationException extends RuntimeException {
 	public DataViolationException(String msg) {
-		// TODO Auto-generated constructor stub
 		super(msg);
 	}
 }

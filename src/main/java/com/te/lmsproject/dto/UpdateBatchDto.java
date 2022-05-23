@@ -26,7 +26,7 @@ public class UpdateBatchDto {
 	private String mentorName;
 	@NotEmpty(message = "Technical id cannot not be empty")
 	@NotNull(message = "Technical id is missing")
-	private List<Integer> techId;
+	private List<Integer> technicalId;
 	@NotEmpty(message = "startDate cannot not be empty")
 	@NotNull(message = "startDate is missing")
 	@JsonFormat(pattern = "dd/MM/yyyy")

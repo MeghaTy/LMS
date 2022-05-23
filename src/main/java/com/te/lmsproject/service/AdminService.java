@@ -18,29 +18,29 @@ import com.te.lmsproject.repository.Mentor;
 import com.te.lmsproject.repository.Request;
 
 public interface AdminService {
-	public Batch addBatch(AddBatchDto batchDto) throws Exception;
+	public Batch addBatch(AddBatchDto batchDto) ;
 	
-	public Batch updateBatch(UpdateBatchDto batch) throws Exception;
+	public Batch updateBatch(UpdateBatchDto batch);
 	
-	public void deleteBatch(Integer id) throws Exception;
+	public void deleteBatch(Integer id);
 	
-	public Batch getBatch(Integer id) throws Exception;
+	public Batch getBatch(Integer id);
 	
-	public List<AdminBatchDispalyDto> getAllBatch() throws Exception;
+	public List<AdminBatchDispalyDto> getAllBatch();
 	
-	public Mentor addMentor(AddMentorDto mentor) throws Exception;
+	public Mentor addMentor(AddMentorDto mentor);
 	
-	public Mentor updateMentor(AddMentorDto mentor) throws Exception;
+	public Mentor updateMentor(AddMentorDto mentor);
 	
-    public void deleteMentor(String empId) throws DataViolationException;
+    public void deleteMentor(String empId);
 	
-	public Mentor getMentor(String empId) throws Exception;
+	public Mentor getMentor(String empId);
 	
-	public List<Mentor> geAlltMentor() throws DuplicateDataException;
+	public List<Mentor> geAlltMentor();
 	
-	public List<EmployeeRequestDto> getAllRequest() throws Exception; 
+	public List<EmployeeRequestDto> getAllRequest() ; 
 	
-	public List<Employee> approveRequest(RequestApproveDto approve) throws Exception;
+	public List<Employee> approveRequest(RequestApproveDto approve);
 	
 	public List<Request> rejectRequest(RejectDto dto);
 

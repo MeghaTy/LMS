@@ -28,20 +28,20 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
-	private Integer empAddrId;
+	private Integer employeeAddressId;
 	
 	@Enumerated(EnumType.STRING)
-	private AddressType empAddrType;
+	private AddressType employeeAddressType;
 	
-	private String empDoorNum;
-	private String empStreet;
-	private String empLocality;
-	private String empCity;
+	private String doorNum;
+	private String street;
+	private String locality;
+	private String city;
 	
 	@Enumerated(EnumType.STRING)
-	private State empState;
+	private State state;
 	
-	private Integer empPincode;
-	private String empLandmark;
+	private Integer pincode;
+	private String landmark;
 
 }

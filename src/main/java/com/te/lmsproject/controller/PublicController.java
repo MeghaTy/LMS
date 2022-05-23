@@ -20,13 +20,10 @@ public class PublicController {
 	@Autowired
 	EmployeeService service;
 	
-	/*
-	 * EMployee Registration
-	 */
 	@PostMapping("/")
-	public ResponseEntity<ResponseBody> register(@RequestBody AddEmployeeDto employee) throws Exception {
+	public ResponseEntity<ResponseBody> register(@RequestBody AddEmployeeDto employee){
 		Employee addEmployee = service.saveEmp(employee);
-		return new ResponseEntity<ResponseBody>(new ResponseBody(false, "Successfully registered employee", addEmployee),
+		return new ResponseEntity<>(new ResponseBody(false, "Successfully registered employee", addEmployee),
 				HttpStatus.OK);
 	}
 

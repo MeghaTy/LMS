@@ -29,20 +29,20 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String empId;
+	private String employeeId;
 
-	private String empName;
+	private String employeeName;
 
-	private LocalDate empDoj;
+	private LocalDate employeeDateOfJoining;
 
-	private LocalDate empDob;
+	private LocalDate employeeDateOfBirth;
 
 	private String emailId;
 	@JsonIgnore
 	private String password;
 
 	@Enumerated(EnumType.STRING)
-	private BloodGroup empBloodGroup;
+	private BloodGroup bloodGroup;
 
 	private String designation;
 
@@ -50,7 +50,7 @@ public class Employee {
 	private Nationality nationality;
 
 	@Enumerated(EnumType.STRING)
-	private EmplyoeeStatus empStatus;
+	private EmplyoeeStatus status;
 
 
 	@Enumerated(EnumType.STRING)
@@ -60,13 +60,13 @@ public class Employee {
 	private SecondaryInfo secondaryInfo;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<EducationalInfo> eduInfos;
+	private List<EducationalInfo> educationInfos;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Address> addressInfo;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<TechnicalSkill> techInfo;
+	private List<TechnicalSkill> technicalSkillInfo;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private BankDetails bankDetails;

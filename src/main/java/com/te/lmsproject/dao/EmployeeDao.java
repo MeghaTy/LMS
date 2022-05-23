@@ -10,9 +10,9 @@ import com.te.lmsproject.repository.Employee;
 @Repository
 public interface EmployeeDao extends JpaRepository<Employee, Integer> {
 	
-	public Employee findByEmpId(String empId);
+	public Employee findByEmployeeId(String empId);
 	
-	public Employee findByEmpName(String empName);
+	public Employee findByEmployeeName(String empName);
 	
-	public List<Employee> findByEmpIdIn(List<String> empId);
+	public List<Employee> findByEmployeeIdIn(List<String> empId);
 }

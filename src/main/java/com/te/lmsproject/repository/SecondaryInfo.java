@@ -21,14 +21,14 @@ import lombok.NoArgsConstructor;
 public class SecondaryInfo {
 	
 		@Id
-		private String empPanNum;
-		private String empAdharNum;
-		private String empFatherName;
-		private String empMotherName;
-		private String empSpouseName;
-		private String empPassportNum;
+		private String panNumber;
+		private String adharNumber;
+		private String fatherName;
+		private String motherName;
+		private String spouseName;
+		private String passportNum;
 		@Enumerated(EnumType.STRING)
-		private MaritalStatus empMartialStatus;
+		private MaritalStatus martialStatus;
 		
 
 }

@@ -69,7 +69,7 @@ public class MentorController {
 	@GetMapping("/batchdashboard/{mentorId}")
 	public ResponseEntity<ResponseBody> getAllBatchs(@PathVariable String mentorId) {
 		List<MentorBatchResDto> allBatch = mentorService.getAllBatch(mentorId);
-		return new ResponseEntity<ResponseBody>(
+		return new ResponseEntity<>(
 				new ResponseBody(false, "Mentor Batch Details feteched successfully", allBatch), HttpStatus.OK);
 	}
 

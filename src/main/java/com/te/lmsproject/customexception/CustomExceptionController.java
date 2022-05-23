@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.te.lmsproject.repository.ResponseBody;
 
 @ControllerAdvice
-public class GenericException {
+public class CustomExceptionController {
 
 	@ExceptionHandler(value = DuplicateDataException.class)
 	public ResponseEntity<ResponseBody> duplicateDataException(DuplicateDataException exception) {
 		
 		
 		return new ResponseEntity<>(new ResponseBody(true,exception.getMessage(),null), HttpStatus.NOT_FOUND);
-	}// end of addCategoryException()
+	}
 	
 	
 	@ExceptionHandler(value = DataViolationException.class)
-	public ResponseEntity<ResponseBody> DataViolationException(DataViolationException exception) {
+	public ResponseEntity<ResponseBody> dataViolation(DataViolationException exception) {
 		
 		
 		return new ResponseEntity<>(new ResponseBody(true,exception.getMessage(),null), HttpStatus.NOT_FOUND);

@@ -29,14 +29,14 @@ public class EmployeeServiceImple implements EmployeeService {
 
 	@Override
 	@Transactional
-	public Employee saveEmp(AddEmployeeDto employee) throws Exception {
-		if(empDao.findByEmpId(employee.getEmpId())==null){
+	public Employee saveEmp(AddEmployeeDto employee){
+		if(empDao.findByEmployeeId(employee.getEmployeeId())==null){
 		Employee emp = new Employee();
 		BeanUtils.copyProperties(employee, emp);
 		emp.setAddressInfo(employee.getAddressInfo());
 		Employee save = empDao.save(emp);
 		Request request = new Request();
-		request.setEmpId(emp.getEmpId());
+		request.setEmployeeId(emp.getEmployeeId());
 		requestDao.save(request);
 		return save;
 		}else {
@@ -46,8 +46,8 @@ public class EmployeeServiceImple implements EmployeeService {
 	}
 
 	@Override
-	public Employee updateEmp(AddEmployeeDto addEmployee) throws Exception {
-		Employee employee = empDao.findByEmpId(addEmployee.getEmpId());
+	public Employee updateEmp(AddEmployeeDto addEmployee) {
+		Employee employee = empDao.findByEmployeeId(addEmployee.getEmployeeId());
 		if(employee==null) {
 			throw new DataViolationException("Employee doess not exist");
 		}
@@ -57,8 +57,8 @@ public class EmployeeServiceImple implements EmployeeService {
 	}
 
 	@Override
-	public Employee getEmpDetails(String empName) throws Exception {
-		Employee findByEmpName = empDao.findByEmpName(empName);
+	public Employee getEmpDetails(String empName){
+		Employee findByEmpName = empDao.findByEmployeeName(empName);
 		if(findByEmpName==null) {
 			throw new DataViolationException("Employee does not exist");
 		}
@@ -69,7 +69,7 @@ public class EmployeeServiceImple implements EmployeeService {
 	
 
 	@Override
-	public List<Employee> getAllEmp() throws DataViolationException {
+	public List<Employee> getAllEmp() {
 		List<Employee> findAll = empDao.findAll();
 		if(findAll.isEmpty()) {
 			throw new DataViolationException("Employee Details are unavaliable");
@@ -78,8 +78,8 @@ public class EmployeeServiceImple implements EmployeeService {
 	}
 
 	@Override
-	public List<MockRatings> getMockDetails(String empName) throws Exception {
-		Employee findByEmpName = empDao.findByEmpName(empName);
+	public List<MockRatings> getMockDetails(String empName){
+		Employee findByEmpName = empDao.findByEmployeeName(empName);
 		if(findByEmpName==null) {
 			throw new DataViolationException("Employee does not exist");
 		}

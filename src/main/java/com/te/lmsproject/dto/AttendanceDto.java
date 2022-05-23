@@ -14,7 +14,7 @@ public class AttendanceDto {
 
 	@NotEmpty(message = "Date cannot not be empty")
 	@NotNull(message = "Date is missing")
-	@JsonFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate date;
 
 	private boolean morning;
@@ -22,6 +22,6 @@ public class AttendanceDto {
 	private boolean afternoon;
 
 	@NotNull(message = "Employee id cannot be empty")
-	private String eId;
+	private String employeeId;
 
 }

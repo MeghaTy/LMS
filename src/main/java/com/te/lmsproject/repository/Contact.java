@@ -27,10 +27,10 @@ public class Contact {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
-	private Integer empContactId;
+	private Integer employeeContactId;
 	
-	private String empContactType;
-	private String empContactNum;
+	private String contactType;
+	private String contactNumber;
 	
 
 }

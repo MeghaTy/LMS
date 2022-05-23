@@ -20,25 +20,13 @@ import com.te.lmsproject.repository.ResponseBody;
 import com.te.lmsproject.service.EmployeeService;
 
 
-//@Slf4j
+
 @RestController
 @RequestMapping("/api/emp")
 public class EmployeeController {
 
 	@Autowired
 	EmployeeService employeeService;
-
-//	@PostMapping("/add")
-//	public ResponseEntity<ResponseBody> saveEmp(@RequestBody AddEmployee employee) {
-//		log.info("Hello!");
-//		Employee saveEmp = employeeService.saveEmp(employee);
-//		if (saveEmp != null) {
-//			return new ResponseEntity<>(new ResponseBody(false, "data inserted", saveEmp), HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(new ResponseBody(true, "data not inserted", null), HttpStatus.BAD_REQUEST);
-//		}
-//
-//	}
 
 	@PutMapping("/update")
 	public ResponseEntity<ResponseBody> updateEmp(@RequestBody AddEmployeeDto employee) throws Exception {

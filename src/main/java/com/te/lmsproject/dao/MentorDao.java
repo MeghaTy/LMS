@@ -13,9 +13,9 @@ public interface MentorDao extends JpaRepository<Mentor, String> {
 	public Mentor findByMentorName(String mentorName);
 	
 
-	public List<Mentor> findByEmpIdIn(List<String> mentorId);
+	public List<Mentor> findByEmployeeIdIn(List<String> mentorId);
 
 
-	public Mentor findByEmpId(String mentorId);
+	public Mentor findByEmployeeId(String mentorId);
 
 }

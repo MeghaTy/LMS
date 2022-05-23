@@ -11,8 +11,8 @@ import lombok.Setter;
 public class EmployeeDisplayInMentorModDto {
 
 	
-	private String empId;
-	private String empName;
+	private String employeeId;
+	private String employeeName;
 	private int mocksTaken;
 	private int attendance;
 	@Enumerated(EnumType.STRING)

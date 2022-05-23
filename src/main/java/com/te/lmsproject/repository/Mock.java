@@ -24,7 +24,7 @@ public class Mock {
 	private int mockNo;
 	
 	@ManyToOne
-	private Technologies tech;
+	private Technologies techology;
 	
 	@ManyToMany
 	private List<Mentor> mentor;
@@ -32,7 +32,7 @@ public class Mock {
 	private LocalDateTime date;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private MockRatings ratings;
+	private MockRatings mockRatings;
 	
 	
 	}

@@ -49,9 +49,9 @@ public class Batch {
 	private BatchStatus status;
 	
 	@OneToMany
-	private List<Technologies> techId;
+	private List<Technologies> technicalId;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private Mentor mentor;
 	

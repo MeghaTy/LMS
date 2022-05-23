@@ -3,10 +3,10 @@ package com.te.lmsproject.enums;
 public enum State {
 	KARNATAKA("KARNATAKA"),DELHI("DELHI");
 	
-	private final String state;
+	private final String temp;
 	
 	State(String state){
-		this.state=state;
+		this.temp=state;
 	}
 
 }

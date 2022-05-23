@@ -32,17 +32,17 @@ public class Experience {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
-	private Integer empExpId;
+	private Integer employeeExpId;
 	
-	private String empCompanyName;
+	private String companyName;
 	
 	@Enumerated(EnumType.ORDINAL)
-	private YearOfExp empYearsOfExp;
+	private YearOfExp yearsOfExp;
 	
-	private LocalDate empDateOfJoining;
-	private LocalDate empDateOfRelieving;
-	private String empDesignation;
-	private String empLocation;
+	private LocalDate dateOfJoining;
+	private LocalDate dateOfRelieving;
+	private String designation;
+	private String location;
 
 
 }

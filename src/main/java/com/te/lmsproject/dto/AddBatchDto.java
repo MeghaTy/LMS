@@ -22,7 +22,7 @@ public class AddBatchDto {
 	@NotNull(message = "Mentor name is missing")
 	private String mentorName;
 	@NotNull(message = "Technology is missing")
-	private List<Integer> techId;
+	private List<Integer> technicalId;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@NotEmpty(message =  "Start date cannot not be empty")
 	@NotNull(message = "Start date is missing")

@@ -57,73 +57,76 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private UserInfoRepo userInfoRepo;
 
+	String technology ="Technology not found";
+	String batchMsg = "Batch not found";
+	String mentorMsg ="Mentor not found";
 	@Override
-	public Batch addBatch(AddBatchDto batchDto) throws Exception {
+	public Batch addBatch(AddBatchDto batchDto) {
 		Batch batchId = batchDao.findByBatchId(batchDto.getBatchId());
 		if (batchId != null) {
 			throw new DuplicateDataException("Duplicate entry");
 		}
 		Mentor mentor = mentorDao.findByMentorName(batchDto.getMentorName());
 		if (mentor == null) {
-			throw new DuplicateDataException("Mentor not found");
+			throw new DuplicateDataException(mentorMsg);
 		}
-		List<Technologies> findAllById = technologyDao.findAllById(batchDto.getTechId());
+		List<Technologies> findAllById = technologyDao.findAllById(batchDto.getTechnicalId());
 		if (findAllById.isEmpty()) {
-			throw new DataViolationException("Technology not found");
+			throw new DataViolationException(technology);
 		}
 		Batch batch = new Batch();
 		batch.setMentor(mentor);
-		batch.setTechId(findAllById);
+		batch.setTechnicalId(findAllById);
 		BeanUtils.copyProperties(batchDto, batch);
 		batchDao.save(batch);
 		return batch;
 	}
 
 	@Override
-	public Batch updateBatch(UpdateBatchDto batch) throws Exception {
+	public Batch updateBatch(UpdateBatchDto batch){
 		Batch batchId = batchDao.findByBatchId(batch.getBatchId());
 		if (batchId == null) {
-			throw new DataViolationException("Batch not found");
+			throw new DataViolationException(batchMsg);
 		}
 		if (batchDao.findByBatchName(batch.getBatchName()) != null) {
 			throw new DuplicateDataException("Batch name already exist");
 		}
 
-		List<Technologies> findAllById = technologyDao.findAllById(batch.getTechId());
+		List<Technologies> findAllById = technologyDao.findAllById(batch.getTechnicalId());
 		if (findAllById.isEmpty()) {
-			throw new DataViolationException("Technology not found");
+			throw new DataViolationException(technology);
 		}
 		BeanUtils.copyProperties(batch, batchId);
-		batchId.setTechId(findAllById);
+		batchId.setTechnicalId(findAllById);
 		batchDao.save(batchId);
 		return batchId;
 
 	}
 
 	@Override
-	public void deleteBatch(Integer batch) throws Exception {
+	public void deleteBatch(Integer batch) {
 		Batch batchId = batchDao.findByBatchId(batch);
 		if (batchId == null) {
-			throw new DataViolationException("Batch not found");
+			throw new DataViolationException(batchMsg);
 		}
 		batchDao.delete(batchId);
 
 	}
 
 	@Override
-	public Mentor addMentor(AddMentorDto mentor) throws Exception {
-		Mentor mentorId = mentorDao.findByEmpId(mentor.getEmpId());
+	public Mentor addMentor(AddMentorDto mentor){
+		Mentor mentorId = mentorDao.findByEmployeeId(mentor.getEmployeeId());
 		Mentor mentor2 = new Mentor();
 		if (mentorId == null) {
 			List<Technologies> findAllById = technologyDao.findAllById(mentor.getSkills());
 			if (findAllById.isEmpty()) {
-				throw new DataViolationException("Technology not found");
+				throw new DataViolationException(technology);
 			}
 			mentor2.setSkills(findAllById);
 			BeanUtils.copyProperties(mentor, mentor2);
 			String password = emailServices.sendPassword(mentor2.getEmailId());
 			UserInfo userInfo = new UserInfo();
-			userInfo.setUsername(mentor2.getEmpId());
+			userInfo.setUsername(mentor2.getEmployeeId());
 			userInfo.setPassword(password);
 			userInfo.setAuthorities("ROLE_MENTOR");
 			userInfoRepo.save(userInfo);
@@ -137,36 +140,36 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Mentor updateMentor(AddMentorDto mentor) throws Exception {
-		Mentor mentor2 = mentorDao.findByEmpId(mentor.getEmpId());
+	public Mentor updateMentor(AddMentorDto mentor){
+		Mentor mentor2 = mentorDao.findByEmployeeId(mentor.getEmployeeId());
 		if (mentor2 != null) {
 			List<Technologies> findAllById = technologyDao.findAllById(mentor.getSkills());
 			if (findAllById.isEmpty()) {
-				throw new DataViolationException("Technology not found");
+				throw new DataViolationException(technology);
 			}
 			mentor2.setEmailId(mentor.getEmailId());
 			mentor2.setMentorName(mentor.getMentorName());
 			mentor2.setSkills(findAllById);
-			mentor2.setEmpId(mentor.getEmpId());
+			mentor2.setEmployeeId(mentor.getEmployeeId());
 			mentorDao.save(mentor2);
 			return mentor2;
 		} else {
-			throw new DataViolationException("Mentor not found");
+			throw new DataViolationException(mentorMsg);
 		}
 
 	}
 
 	@Override
-	public Batch getBatch(Integer batchId) throws Exception {
+	public Batch getBatch(Integer batchId){
 		Batch findByBatchId = batchDao.findByBatchId(batchId);
 		if (findByBatchId == null) {
-			throw new DataViolationException("Batch not found");
+			throw new DataViolationException(batchMsg);
 		}
 		return findByBatchId;
 	}
 
 	@Override
-	public List<AdminBatchDispalyDto> getAllBatch() throws Exception {
+	public List<AdminBatchDispalyDto> getAllBatch(){
 		List<Batch> batchDetails = batchDao.findAll();
 		if (batchDetails.isEmpty()) {
 			throw new DataViolationException("No batch detials avaliable");
@@ -177,23 +180,23 @@ public class AdminServiceImpl implements AdminService {
 			AdminBatchDispalyDto dto = new AdminBatchDispalyDto();
 			BeanUtils.copyProperties(b, dto);
 			dto.setMentorName(b.getMentor().getMentorName());
-			dto.setTechnologies(b.getTechId());
+			dto.setTechnologies(b.getTechnicalId());
 			list.add(dto);
 		});
 		return list;
 	}
 
 	@Override
-	public Mentor getMentor(String empId) throws Exception {
-		Mentor findByEmpId = mentorDao.findByEmpId(empId);
+	public Mentor getMentor(String empId) {
+		Mentor findByEmpId = mentorDao.findByEmployeeId(empId);
 		if (findByEmpId == null) {
-			throw new DataViolationException("Mentor Not Found");
+			throw new DataViolationException(mentorMsg);
 		}
 		return findByEmpId;
 	}
 
 	@Override
-	public List<Mentor> geAlltMentor() throws DuplicateDataException {
+	public List<Mentor> geAlltMentor(){
 		List<Mentor> findAll = mentorDao.findAll();
 		if (findAll.isEmpty()) {
 			throw new DuplicateDataException("No mentor details avaliable");
@@ -202,38 +205,38 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void deleteMentor(String empId) throws DataViolationException {
-		Mentor findByEmpId = mentorDao.findByEmpId(empId);
+	public void deleteMentor(String empId){
+		Mentor findByEmpId = mentorDao.findByEmployeeId(empId);
 		if (findByEmpId == null) {
-			throw new DataViolationException("Mentor Not Found");
+			throw new DataViolationException(mentorMsg);
 		}
 		mentorDao.delete(findByEmpId);
 
 	}
 
 	@Override
-	public List<EmployeeRequestDto> getAllRequest() throws Exception {
+	public List<EmployeeRequestDto> getAllRequest(){
 		List<Request> findAll = requestDao.findAll();
 		if (findAll.isEmpty()) {
 			throw new DataViolationException("Request list is empty");
 		}
-		List<String> empId = new ArrayList<String>();
+		List<String> empId = new ArrayList<>();
 		for (Request request : findAll) {
-			String empId2 = request.getEmpId();
+			String empId2 = request.getEmployeeId();
 			empId.add(empId2);
 		}
-		List<Employee> findAllById = employeeDao.findByEmpIdIn(empId);
+		List<Employee> findAllById = employeeDao.findByEmployeeIdIn(empId);
 
-		List<EmployeeRequestDto> dtos = new ArrayList<EmployeeRequestDto>();
+		List<EmployeeRequestDto> dtos = new ArrayList<>();
 		for (Employee employee : findAllById) {
 			EmployeeRequestDto dto = new EmployeeRequestDto();
-			dto.setEmpId(employee.getEmpId());
-			dto.setEmpName(employee.getEmpName());
-			dto.setExperience(employee.getExperiences().get(0).getEmpYearsOfExp());
-			dto.setContactNo(employee.getContacts().get(0).getEmpContactNum());
-			dto.setEmpPercentage(employee.getEduInfos().get(employee.getEduInfos().size() - 1).getEmpPercentage());
-			dto.setEmpYearOfPassOut(
-					employee.getEduInfos().get(employee.getEduInfos().size() - 1).getEmpYearOfPassOut());
+			dto.setEmployeeId(employee.getEmployeeId());
+			dto.setEmployeeName(employee.getEmployeeName());
+			dto.setExperience(employee.getExperiences().get(0).getYearsOfExp());
+			dto.setContactNumber(employee.getContacts().get(0).getContactNumber());
+			dto.setPercentage(employee.getEducationInfos().get(employee.getEducationInfos().size() - 1).getPercentage());
+			dto.setYearOfPassOut(
+					employee.getEducationInfos().get(employee.getEducationInfos().size() - 1).getYearOfPassOut());
 
 			dtos.add(dto);
 
@@ -243,8 +246,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public List<Employee> approveRequest(RequestApproveDto approve) throws Exception {
-		List<Employee> findAll = employeeDao.findByEmpIdIn(approve.getEmployeesId());
+	public List<Employee> approveRequest(RequestApproveDto approve){
+		List<Employee> findAll = employeeDao.findByEmployeeIdIn(approve.getEmployeesId());
 		if (findAll.isEmpty()) {
 			throw new DataViolationException("Employee does not exist");
 		}
@@ -259,19 +262,19 @@ public class AdminServiceImpl implements AdminService {
 		findAll.stream().forEach(e -> {
 			String sendPassword = emailServices.sendPassword(e.getEmailId());
 			UserInfo userInfo = new UserInfo();
-			userInfo.setUsername(e.getEmpId());
+			userInfo.setUsername(e.getEmployeeId());
 			userInfo.setPassword(sendPassword);
 			userInfo.setAuthorities("ROLE_EMPLOYEE");
 			userInfoRepo.save(userInfo);
 		});
 
-		requestDao.deleteByEmpIdIn(approve.getEmployeesId());
+		requestDao.deleteByEmployeeIdIn(approve.getEmployeesId());
 		return findAll;
 	}
 
 	@Override
 	public List<Request> rejectRequest(RejectDto dto) {
-		List<Request> findAllById = requestDao.findByEmpIdIn(dto.getIds());
+		List<Request> findAllById = requestDao.findByEmployeeIdIn(dto.getEmployeeIds());
 		for (Request request : findAllById) {
 			request.setRejectReason(dto.getReason());
 			request.setRejected(true);
@@ -284,10 +287,9 @@ public class AdminServiceImpl implements AdminService {
 	public List<DropDownDto> getMentorName() {
 		List<Mentor> mentor = mentorDao.findAll();
 		List<DropDownDto> list = new ArrayList<>();
-		mentor.stream().forEach(m -> {
-			list.add(new DropDownDto(m.getId(), m.getMentorName()));
-		});
-		System.out.println(list);
+		mentor.stream().forEach(m -> 
+			list.add(new DropDownDto(m.getId(), m.getMentorName()))
+		);
 		return list;
 	}
 

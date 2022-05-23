@@ -25,18 +25,18 @@ import lombok.Setter;
 public class BankDetails {
 	
 	@Id
-	private Long empAccountNum;
+	private Long employeeAccountNum;
 	
-	private String empBankName;
+	private String bankName;
 	
-	private String empAccountType;
+	private String accountType;
 	
-	private String empIFSCCode;
+	private String iFSCCode;
 	
-	private String empBranch;
+	private String branch;
 	
 	@Enumerated(EnumType.STRING)
-	private State empState;
+	private State state;
 	
 
 }

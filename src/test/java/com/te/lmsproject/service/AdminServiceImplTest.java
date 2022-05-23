@@ -42,12 +42,9 @@ class AdminServiceImplTest {
 	@Mock
 	private EmployeeDao employeeDao;
 
-//	@Autowired
-//	private AdminRepository adminRepo;
-//	@Autowired
-//	private UserLoginRepository loginRepo;
+
 @Test
-	public void addBatchTest() throws Exception {
+	 void addBatchTest() throws Exception {
 		AddBatchDto batchDto= new AddBatchDto();
 		batchDto.setBatchId(1);
 		batchDto.setBatchName("abc");
@@ -62,7 +59,7 @@ class AdminServiceImplTest {
 		Technologies technologies= new Technologies();
 		technologies.setId(1);
 		findAllById.add(technologies);
-		batch.setTechId(findAllById);
+		batch.setTechnicalId(findAllById);
 		batchs.add(batch);
 		mentor.setBatch(batchs);
 				Mockito.when(mentorDao.findByMentorName(Mockito.any())).thenReturn(mentor);

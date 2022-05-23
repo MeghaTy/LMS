@@ -18,7 +18,7 @@ public class Request {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonIgnore
 	private Integer id;
-	private String empId;
+	private String employeeId;
 	private String rejectReason;
 	private boolean rejected = false;
 	

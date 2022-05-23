@@ -22,7 +22,7 @@ public class Mentor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String mentorName;
-	private String empId;
+	private String employeeId;
 	private String emailId;
 	private String password;
 	

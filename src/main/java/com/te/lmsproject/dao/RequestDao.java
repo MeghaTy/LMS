@@ -9,8 +9,8 @@ import com.te.lmsproject.repository.Request;
 
 @Repository
 public interface RequestDao extends JpaRepository<Request, Integer> {
-	public void deleteByEmpIdIn(List<String> empId);
+	public void deleteByEmployeeIdIn(List<String> empId);
 
-	public List<Request> findByEmpIdIn(List<String> ids);
+	public List<Request> findByEmployeeIdIn(List<String> ids);
 
 }

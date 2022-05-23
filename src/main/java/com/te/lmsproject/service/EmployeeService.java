@@ -8,15 +8,15 @@ import com.te.lmsproject.repository.Employee;
 import com.te.lmsproject.repository.MockRatings;
 
 public interface EmployeeService {
-	public Employee saveEmp(AddEmployeeDto employee) throws Exception; 
+	public Employee saveEmp(AddEmployeeDto employee); 
 	
-	public Employee updateEmp(AddEmployeeDto addEmployee) throws Exception;
+	public Employee updateEmp(AddEmployeeDto addEmployee);
 
-	public Employee getEmpDetails(String empName) throws Exception;
+	public Employee getEmpDetails(String empName);
 
-	public List<Employee> getAllEmp() throws DataViolationException;
+	public List<Employee> getAllEmp();
 	
-	public List<MockRatings> getMockDetails(String empName) throws Exception;
+	public List<MockRatings> getMockDetails(String empName);
 	
 	
 

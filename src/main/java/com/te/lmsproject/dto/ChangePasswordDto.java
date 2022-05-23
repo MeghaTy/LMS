@@ -11,7 +11,7 @@ import lombok.Setter;
 public class ChangePasswordDto {
 	@NotNull(message = "Employee Id is missing")
 	@NotEmpty(message = "EMployee Id cannot be empty")
-	private String empId;
+	private String employeeId;
 	@NotNull(message = "existingPassword is missing")
 	@NotEmpty(message = "existingPassword cannot be empty")
 	private String existingPassword;

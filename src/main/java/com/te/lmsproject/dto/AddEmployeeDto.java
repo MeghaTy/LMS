@@ -35,20 +35,20 @@ public class AddEmployeeDto {
 	@NotNull
 	@NotEmpty(message =  "Employee name cannot not be empty")
 	@NotNull(message = "Employee name is missing")
-	private String empName;
+	private String employeeName;
 	@NotEmpty(message =  "Date of joining cannot not be empty")
 	@NotNull(message = "Date of joining is missing")
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate empDoj;
+	private LocalDate employeeDateOfJoining;
 	@JsonFormat(pattern ="dd/MM/yyyy")
 	@NotEmpty(message =  "Date of Birth cannot not be empty")
 	@NotNull(message = "Date of birtht is missing")
-	private LocalDate empDob;
+	private LocalDate employeeDateOfBirth;
 	@Email
 	private String emailId;
 	@NotEmpty(message =  "Blood Group cannot not be empty")
 	@NotNull(message = "blood group is missing")
-	private BloodGroup empBloodGroup;
+	private BloodGroup bloodGroup;
 	@NotEmpty(message =  "Designation cannot not be empty")
 	@NotNull(message = "Designation is missing")
 	private String designation;
@@ -63,15 +63,15 @@ public class AddEmployeeDto {
 	@NotEmpty(message =  "Employee status cannot not be empty")
 	@NotNull(message = "Employee status is missing")
 	@Enumerated(EnumType.STRING)
-	private EmplyoeeStatus empStatus;
+	private EmplyoeeStatus status;
 
 	private SecondaryInfo secondaryInfo;
 
-	private List<EducationalInfo> eduInfos ;
+	private List<EducationalInfo> educationInfos ;
 
 	private List<Address> addressInfo;
 
-	private List<TechnicalSkill> techInfo;
+	private List<TechnicalSkill> technicalSkillInfo;
 
 	private BankDetails bankDetails;
 

@@ -23,20 +23,20 @@ public class EducationalInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
-	private Integer empEduId;
+	private Integer employeeEduId;
 	
-	private String empEduType;
+	private String educationType;
 	
-	private Integer empYearOfPassOut;
+	private Integer yearOfPassOut;
 	
-	private Double empPercentage;
+	private Double percentage;
 	
-	private String empUniversity;
+	private String university;
 	
-	private String empInstituteName;
+	private String instituteName;
 	
-	private String empSpecialization;
+	private String specialization;
 	
 	@Enumerated(EnumType.STRING)
-	private State empState;
+	private State state;
 }

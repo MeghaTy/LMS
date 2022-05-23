@@ -9,10 +9,10 @@ import lombok.Setter;
 public class EmployeeRequestDto {
 
 	
-	private String empId;
-	private String empName;
-	private	int empYearOfPassOut;
-	private double empPercentage;
+	private String employeeId;
+	private String employeeName;
+	private	int yearOfPassOut;
+	private double percentage;
 	private YearOfExp experience;
-	private String contactNo;
+	private String contactNumber;
 }

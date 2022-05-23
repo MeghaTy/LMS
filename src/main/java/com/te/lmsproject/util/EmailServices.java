@@ -21,7 +21,6 @@ package com.te.lmsproject.util;
 			message.setTo(to);
 			message.setSubject("Auto Generated Password");
 			UUID uuid = UUID.randomUUID();
-			System.out.println(uuid);
 			message.setText("The password ==> "+uuid);
 			this.mailSender.send(message);
 			return ""+uuid;				

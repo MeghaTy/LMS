@@ -2,10 +2,10 @@ package com.te.lmsproject.enums;
 
 public enum Gender {
 	MALE("MALE"),FEMALE("FEMALE"),OTHERS("OTHERS");
-	private final String gender;
+	private final String temp;
 	
 	Gender(String gender){
-		this.gender=gender;
+		this.temp=gender;
 	}
 
 }

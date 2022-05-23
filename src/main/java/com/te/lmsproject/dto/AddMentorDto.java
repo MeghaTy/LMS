@@ -16,7 +16,7 @@ public class AddMentorDto {
 	private String mentorName;
 	@NotEmpty(message = "Mentor employeeId cannot not be empty")
 	@NotNull(message = "Mentor employeeId is missing")
-	private String empId;
+	private String employeeId;
 	@NotEmpty(message = "Mentor emailId cannot not be empty")
 	@NotNull(message = "Mentor emailId is missing")
 	private String emailId;

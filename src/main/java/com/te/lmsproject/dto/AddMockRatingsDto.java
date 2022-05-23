@@ -18,13 +18,13 @@ public class AddMockRatingsDto {
 	private MockType mockType;
 
 	@NotNull(message = " Employee ID is missing")
-	private String empid;
+	private String employeeId;
 
 	@NotNull(message = "Mock Type is missing")
 	private String mockTakenBy;
 	
 	@NotNull(message = "Tech id is missing")
-	private Integer techId;
+	private Integer technicalId;
 	
 	@NotNull(message = "Practical mask is missing")
 	@Size(min = 0, max = 100)

@@ -37,31 +37,35 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+	
+	String failure ="Failure";
+	String fetched = "Data Fetched Successfully";
+	
 
 	@PostMapping("/batch/")
-	public ResponseEntity<ResponseBody> addBatch(@RequestBody AddBatchDto batchDTO) throws Exception {
+	public ResponseEntity<ResponseBody> addBatch(@RequestBody AddBatchDto batchDTO){
 		Batch addBatch = adminService.addBatch(batchDTO);
 		if (addBatch != null) {
 			return new ResponseEntity<>(new ResponseBody(false, "data inserted", addBatch), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "data not inserted", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@PutMapping("/batch/update")
-	public ResponseEntity<ResponseBody> updateBatch(@RequestBody UpdateBatchDto batchDTO) throws Exception {
+	public ResponseEntity<ResponseBody> updateBatch(@RequestBody UpdateBatchDto batchDTO){
 		Batch addBatch = adminService.updateBatch(batchDTO);
 		if (addBatch != null) {
 			return new ResponseEntity<>(new ResponseBody(false, "data updated", addBatch), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "data not updated", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@DeleteMapping("/batch/{batchId}")
-	public ResponseEntity<ResponseBody> deleteBatch(@PathVariable Integer batchId) throws Exception {
+	public ResponseEntity<ResponseBody> deleteBatch(@PathVariable Integer batchId) {
 		adminService.deleteBatch(batchId);
 		return new ResponseEntity<>(new ResponseBody(false, "Batch deleted successfully", null), HttpStatus.OK);
 	}
@@ -70,91 +74,91 @@ public class AdminController {
 	public ResponseEntity<ResponseBody> getBatch(@PathVariable Integer batchId) throws Exception {
 		Batch mentor = adminService.getBatch(batchId);
 		if (mentor != null) {
-			return new ResponseEntity<>(new ResponseBody(false, "data fetched", mentor), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseBody(false, fetched, mentor), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "data not fetched", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@GetMapping("/getAllBatch")
-	public ResponseEntity<ResponseBody> getAllBatch() throws Exception {
+	public ResponseEntity<ResponseBody> getAllBatch() {
 		List<AdminBatchDispalyDto> mentor = adminService.getAllBatch();
 		if (mentor != null) {
-			return new ResponseEntity<>(new ResponseBody(false, "data fetched", mentor), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseBody(false, fetched, mentor), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "data not fetched", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@PostMapping("/mentor")
-	public ResponseEntity<ResponseBody> addMentor(@RequestBody AddMentorDto addMentor) throws Exception {
+	public ResponseEntity<ResponseBody> addMentor(@RequestBody AddMentorDto addMentor) {
 		Mentor mentor = adminService.addMentor(addMentor);
 		if (mentor != null) {
 			return new ResponseEntity<>(new ResponseBody(false, "Mentor Added", mentor), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "Mentor not Added", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@PutMapping("/mentor/update")
-	public ResponseEntity<ResponseBody> updateMentor(@RequestBody AddMentorDto addMentor) throws Exception {
+	public ResponseEntity<ResponseBody> updateMentor(@RequestBody AddMentorDto addMentor) {
 		Mentor mentor = adminService.updateMentor(addMentor);
 		if (mentor != null) {
 			return new ResponseEntity<>(new ResponseBody(false, "Mentor updated", mentor), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "Mentor not updated", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@GetMapping("/getMentor/{empId}")
-	public ResponseEntity<ResponseBody> getBatch(@PathVariable String empId) throws Exception {
+	public ResponseEntity<ResponseBody> getBatch(@PathVariable String empId)  {
 		Mentor mentor = adminService.getMentor(empId);
 		if (mentor != null) {
-			return new ResponseEntity<>(new ResponseBody(false, "data fetched", mentor), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseBody(false, fetched, mentor), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "data not fetched", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@GetMapping("/getAllMentor")
-	public ResponseEntity<ResponseBody> getAllMentor() throws DuplicateDataException {
+	public ResponseEntity<ResponseBody> getAllMentor() {
 		List<Mentor> mentor = adminService.geAlltMentor();
 		if (mentor != null) {
-			return new ResponseEntity<>(new ResponseBody(false, "data fetched", mentor), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseBody(false, fetched, mentor), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "data not fetched", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@DeleteMapping("/mentor/{empId}")
-	public ResponseEntity<ResponseBody> deleteMentor(@PathVariable String empId) throws DataViolationException {
+	public ResponseEntity<ResponseBody> deleteMentor(@PathVariable String empId) {
 		adminService.deleteMentor(empId);
 		return new ResponseEntity<>(new ResponseBody(false, "Mentor deleted successfully", null), HttpStatus.OK);
 	}
 
 	@GetMapping("/request")
-	public ResponseEntity<ResponseBody> getRequest() throws Exception {
+	public ResponseEntity<ResponseBody> getRequest() {
 		List<EmployeeRequestDto> request = adminService.getAllRequest();
 		if (request != null) {
 			return new ResponseEntity<>(new ResponseBody(false, "success", request), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "failure", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	@PostMapping("/approverequest")
-	public ResponseEntity<ResponseBody> approveRequest(@RequestBody RequestApproveDto approve) throws Exception {
+	public ResponseEntity<ResponseBody> approveRequest(@RequestBody RequestApproveDto approve)  {
 		List<Employee> request = adminService.approveRequest(approve);
 		if (request != null) {
 			return new ResponseEntity<>(new ResponseBody(false, "success", request), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "failure", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -172,7 +176,7 @@ public class AdminController {
 			return new ResponseEntity<>(new ResponseBody(false, "All mentor name successfully fetched", mentorName),
 					HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "failure", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -182,7 +186,7 @@ public class AdminController {
 		if (batchId != null) {
 			return new ResponseEntity<>(new ResponseBody(false, "Drop Down of bacth Ids", batchId), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, "failure", null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseBody(true, failure, null), HttpStatus.BAD_REQUEST);
 		}
 	}
 

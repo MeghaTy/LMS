@@ -15,6 +15,6 @@ public class RejectDto {
 	private String reason;
 	@NotEmpty(message = "Employee Id cannot not be empty")
 	@NotNull(message = "Employee Id is missing")
-	private List<String> ids;
+	private List<String> employeeIds;
 
 }

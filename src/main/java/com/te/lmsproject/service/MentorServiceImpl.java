@@ -2,11 +2,13 @@ package com.te.lmsproject.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.te.lmsproject.customexception.DataViolationException;
 import com.te.lmsproject.dao.AttendaceDao;
 import com.te.lmsproject.dao.BatchDao;
 import com.te.lmsproject.dao.EmployeeDao;
@@ -63,16 +65,16 @@ public class MentorServiceImpl implements MentorService {
 	@Override
 	public List<MockRatings> getEmployeeDetails(String empId) {
 
-		Employee empDetails = employeeDao.findByEmpId(empId);
+		Employee empDetails = employeeDao.findByEmployeeId(empId);
 		if(empDetails==null) {
-			throw new RuntimeException();
+			throw new DataViolationException("Employee Does not exist");
 		}
 		return empDetails.getMockDetails();
 	}
 
 	@Override
 	public List<DropDownDto> getBatchNameByMentor(String mentorId) {
-		Mentor mentor = mentorDao.findByEmpId(mentorId);
+		Mentor mentor = mentorDao.findByEmployeeId(mentorId);
 		List<Batch> batchDetails = mentor.getBatch();
 		List<DropDownDto> dropDown = new ArrayList<>();
 		for (Batch b : batchDetails) {
@@ -88,13 +90,13 @@ public class MentorServiceImpl implements MentorService {
 	public List<EmployeeDisplayInMentorModDto> getstatus(Integer batchId) {
 		Batch batchDetails = batchDao.findByBatchId(batchId);
 		List<Employee> employee = batchDetails.getEmployee();
-		List<EmployeeDisplayInMentorModDto> displayInMentorMod = new ArrayList<EmployeeDisplayInMentorModDto>();
+		List<EmployeeDisplayInMentorModDto> displayInMentorMod = new ArrayList<>();
 		for (Employee emp : employee) {
 			EmployeeDisplayInMentorModDto mod = new EmployeeDisplayInMentorModDto();
-			mod.setEmpId(emp.getEmpId());
-			mod.setEmpName(emp.getEmpName());
+			mod.setEmployeeId(emp.getEmployeeId());
+			mod.setEmployeeName(emp.getEmployeeName());
 			mod.setMocksTaken(emp.getMockDetails().size());
-			mod.setStatus(emp.getEmpStatus());
+			mod.setStatus(emp.getStatus());
 			mod.setAttendance(emp.getAttendances().size());
 			displayInMentorMod.add(mod);
 		}
@@ -107,10 +109,13 @@ public class MentorServiceImpl implements MentorService {
 		Mock mock = new Mock();
 		mock.setMockNo(mockdetails.getMockNo());
 
-		Technologies technologies = technologyDao.findById(mockdetails.getTechId()).get();
-		mock.setTech(technologies);
-
-		List<Mentor> mentorDetails = mentorDao.findByEmpIdIn(mockdetails.getMentorId());
+	Optional<Technologies> technology = technologyDao.findById(mockdetails.getTechId());
+	if(technology.isPresent()) {
+		Technologies technologies = technology.get();
+		mock.setTechology(technologies);
+	}
+		
+		List<Mentor> mentorDetails = mentorDao.findByEmployeeIdIn(mockdetails.getMentorId());
 		mock.setMentor(mentorDetails);
 
 		mock.setDate(mockdetails.getDateTime());
@@ -124,7 +129,7 @@ public class MentorServiceImpl implements MentorService {
 
 	@Override
 	public List<MentorBatchResDto> getAllBatch(String mentorId) {
-		Mentor mentor = mentorDao.findByEmpId(mentorId);
+		Mentor mentor = mentorDao.findByEmployeeId(mentorId);
 		List<Batch> mentorBatchDetails = batchDao.findByMentor(mentor);
 		List<MentorBatchResDto> arrayList = new ArrayList<>();
 		mentorBatchDetails.stream().forEach(m -> {
@@ -135,10 +140,10 @@ public class MentorServiceImpl implements MentorService {
 			mentorBatchResDto.setStartDate(m.getStartDate());
 			mentorBatchResDto.setEndDate(m.getEndDate());
 			mentorBatchResDto.setStatus(m.getStatus());
-			List<String> list = new ArrayList<String>();
-			m.getTechId().stream().forEach(t -> {
-				list.add(t.getTech());
-			});
+			List<String> list = new ArrayList<>();
+			m.getTechnicalId().stream().forEach(t -> 
+				list.add(t.getTechnology())
+			);
 			mentorBatchResDto.setTechnologies(list);
 			arrayList.add(mentorBatchResDto);
 		});
@@ -149,7 +154,7 @@ public class MentorServiceImpl implements MentorService {
 	public void giveAttendance(AttendanceDto attendance) {
 		Attendance attendanceDetails = new Attendance();
 		BeanUtils.copyProperties(attendance, attendanceDetails);
-		Employee employee = employeeDao.findByEmpId(attendance.getEId());
+		Employee employee = employeeDao.findByEmployeeId(attendance.getEmployeeId());
 		List<Attendance> attendances = employee.getAttendances();
 		attendances.add(attendanceDetails);
 		employeeDao.save(employee);
@@ -160,8 +165,12 @@ public class MentorServiceImpl implements MentorService {
 	@Override
 	public MockRatings giveMockRatings(AddMockRatingsDto ratings) {
 		MockRatings mockRatings = new MockRatings();
-		Employee employee = employeeDao.findByEmpId(ratings.getEmpid());
-		Technologies technologies = technologyDao.findById(ratings.getTechId()).get();
+		Employee employee = employeeDao.findByEmployeeId(ratings.getEmployeeId());
+		Optional<Technologies> technology = technologyDao.findById(ratings.getTechnicalId());
+		Technologies technologies = null;
+		if(technology.isPresent()) {
+			technologies = technology.get();
+		}
 		BeanUtils.copyProperties(ratings, mockRatings);
 		mockRatings.setTech(technologies);
 		mockRatings.setEmployee(employee);
@@ -176,21 +185,21 @@ public class MentorServiceImpl implements MentorService {
 
 	@Override
 	public String changePassword(ChangePasswordDto dto) {
-		UserInfo userDetails = infoRepo.findByUsername(dto.getEmpId());
+		UserInfo userDetails = infoRepo.findByUsername(dto.getEmployeeId());
 		if (userDetails == null) {
-			throw new RuntimeException("No user with the Username");
+			throw new DataViolationException("No user with the Username");
 		}
 		if (dto.getExistingPassword().equals(userDetails.getPassword())
 				&& dto.getNewPassword().equals(dto.getReTypeNewPassword())) {
 			userDetails.setPassword(dto.getNewPassword());
 			infoRepo.save(userDetails);
 			
-			Employee empId = employeeDao.findByEmpId(dto.getEmpId());
+			Employee empId = employeeDao.findByEmployeeId(dto.getEmployeeId());
 			if(empId!=null) {
 			empId.setPassword(dto.getNewPassword());
 			employeeDao.save(empId);
 			}else {
-			Mentor findByEmpId = mentorDao.findByEmpId(dto.getEmpId());
+			Mentor findByEmpId = mentorDao.findByEmployeeId(dto.getEmployeeId());
 			findByEmpId.setPassword(dto.getNewPassword());
 			mentorDao.save(findByEmpId);
 			}
