@@ -31,7 +31,7 @@ public class AddEmployeeDto {
 	
 	@NotEmpty(message =  "Employee Id cannot not be empty")
 	@NotNull(message = "Employee is missing")
-	private String empId;
+	private String employeeId;
 	@NotNull
 	@NotEmpty(message =  "Employee name cannot not be empty")
 	@NotNull(message = "Employee name is missing")

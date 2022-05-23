@@ -37,13 +37,13 @@ import com.te.lmsproject.util.EmailServices;
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired
-	BatchDao batchDao;
+	private BatchDao batchDao;
 
 	@Autowired
-	MentorDao mentorDao;
+	private MentorDao mentorDao;
 
 	@Autowired
-	TechnologyDao technologyDao;
+	private TechnologyDao technologyDao;
 
 	@Autowired
 	private RequestDao requestDao;
@@ -86,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
 			throw new DataViolationException("Batch not found");
 		}
 		if (batchDao.findByBatchName(batch.getBatchName()) != null) {
-            throw new DuplicateDataException("Batch name already exist");
+			throw new DuplicateDataException("Batch name already exist");
 		}
 
 		List<Technologies> findAllById = technologyDao.findAllById(batch.getTechId());
@@ -129,11 +129,11 @@ public class AdminServiceImpl implements AdminService {
 			userInfoRepo.save(userInfo);
 			mentorDao.save(mentor2);
 			return mentor2;
-		}else {
+		} else {
 			throw new DuplicateDataException("Duplicate entry");
 
 		}
-		
+
 	}
 
 	@Override
@@ -150,16 +150,16 @@ public class AdminServiceImpl implements AdminService {
 			mentor2.setEmpId(mentor.getEmpId());
 			mentorDao.save(mentor2);
 			return mentor2;
-		}else {
+		} else {
 			throw new DataViolationException("Mentor not found");
 		}
-		
+
 	}
 
 	@Override
 	public Batch getBatch(Integer batchId) throws Exception {
 		Batch findByBatchId = batchDao.findByBatchId(batchId);
-		if(findByBatchId== null) {
+		if (findByBatchId == null) {
 			throw new DataViolationException("Batch not found");
 		}
 		return findByBatchId;
@@ -168,7 +168,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<AdminBatchDispalyDto> getAllBatch() throws Exception {
 		List<Batch> batchDetails = batchDao.findAll();
-		if(batchDetails.isEmpty()) {
+		if (batchDetails.isEmpty()) {
 			throw new DataViolationException("No batch detials avaliable");
 		}
 
@@ -186,7 +186,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Mentor getMentor(String empId) throws Exception {
 		Mentor findByEmpId = mentorDao.findByEmpId(empId);
-		if(findByEmpId==null) {
+		if (findByEmpId == null) {
 			throw new DataViolationException("Mentor Not Found");
 		}
 		return findByEmpId;
@@ -195,7 +195,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Mentor> geAlltMentor() throws DuplicateDataException {
 		List<Mentor> findAll = mentorDao.findAll();
-		if(findAll.isEmpty()) {
+		if (findAll.isEmpty()) {
 			throw new DuplicateDataException("No mentor details avaliable");
 		}
 		return findAll;
@@ -204,7 +204,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteMentor(String empId) throws DataViolationException {
 		Mentor findByEmpId = mentorDao.findByEmpId(empId);
-		if(findByEmpId==null) {
+		if (findByEmpId == null) {
 			throw new DataViolationException("Mentor Not Found");
 		}
 		mentorDao.delete(findByEmpId);
@@ -214,7 +214,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<EmployeeRequestDto> getAllRequest() throws Exception {
 		List<Request> findAll = requestDao.findAll();
-		if(findAll.isEmpty()) {
+		if (findAll.isEmpty()) {
 			throw new DataViolationException("Request list is empty");
 		}
 		List<String> empId = new ArrayList<String>();
@@ -223,7 +223,7 @@ public class AdminServiceImpl implements AdminService {
 			empId.add(empId2);
 		}
 		List<Employee> findAllById = employeeDao.findByEmpIdIn(empId);
-		
+
 		List<EmployeeRequestDto> dtos = new ArrayList<EmployeeRequestDto>();
 		for (Employee employee : findAllById) {
 			EmployeeRequestDto dto = new EmployeeRequestDto();
@@ -245,11 +245,11 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public List<Employee> approveRequest(RequestApproveDto approve) throws Exception {
 		List<Employee> findAll = employeeDao.findByEmpIdIn(approve.getEmployeesId());
-		if(findAll.isEmpty()) {
+		if (findAll.isEmpty()) {
 			throw new DataViolationException("Employee does not exist");
 		}
 		Batch batch = batchDao.findByBatchId(approve.getBatchId());
-		if(batch==null) {
+		if (batch == null) {
 			throw new DataViolationException("Batch does not exist");
 		}
 		List<Employee> employee = batch.getEmployee();
