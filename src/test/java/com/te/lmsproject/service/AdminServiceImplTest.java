@@ -12,15 +12,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.te.lmsproject.dao.BatchDao;
-import com.te.lmsproject.dao.EmployeeDao;
-import com.te.lmsproject.dao.MentorDao;
-import com.te.lmsproject.dao.RequestDao;
-import com.te.lmsproject.dao.TechnologyDao;
-import com.te.lmsproject.dto.AddBatchDto;
-import com.te.lmsproject.repository.Batch;
-import com.te.lmsproject.repository.Mentor;
-import com.te.lmsproject.repository.Technologies;
+import com.te.lmsproject.dao.admin.BatchDao;
+import com.te.lmsproject.dao.admin.MentorDao;
+import com.te.lmsproject.dao.admin.RequestDao;
+import com.te.lmsproject.dao.employee.EmployeeDao;
+import com.te.lmsproject.dao.util.TechnologyDao;
+import com.te.lmsproject.dto.admin.AddBatchDto;
+import com.te.lmsproject.repository.admin.Batch;
+import com.te.lmsproject.repository.admin.Mentor;
+import com.te.lmsproject.repository.util.Technologies;
+import com.te.lmsproject.service.admin.AdminServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 class AdminServiceImplTest {
