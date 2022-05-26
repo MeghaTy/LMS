@@ -1,8 +1,7 @@
 package com.te.lmsproject.dto.mentor;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import com.te.lmsproject.enums.EmplyoeeStatus;
+import java.util.List;
+import com.te.lmsproject.repository.mentor.MockRatings;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,7 @@ public class EmployeeDisplayInMentorModDto {
 	private String employeeName;
 	private int mocksTaken;
 	private int attendance;
-	@Enumerated(EnumType.STRING)
-	private EmplyoeeStatus status;
+	private String status;
+	private List<MockRatings> mockRatings;
 
 }

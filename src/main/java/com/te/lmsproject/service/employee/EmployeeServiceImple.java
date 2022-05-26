@@ -44,6 +44,7 @@ public class EmployeeServiceImple implements EmployeeService {
 		if(employeeDao.findByEmployeeId(employee.getEmployeeId())==null){
 		Employee emp = new Employee();
 		BeanUtils.copyProperties(employee, emp);
+		emp.setStatus("Active");
 		emp.setAddressInfo(employee.getAddressInfo());
 		Employee save = employeeDao.save(emp);
 		Request request = new Request();

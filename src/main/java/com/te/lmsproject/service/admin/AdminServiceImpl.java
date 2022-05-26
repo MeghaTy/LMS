@@ -25,13 +25,13 @@ import com.te.lmsproject.dto.admin.RejectDto;
 import com.te.lmsproject.dto.admin.RequestApproveDto;
 import com.te.lmsproject.dto.admin.UpdateBatchDto;
 import com.te.lmsproject.dto.util.DropDownDto;
-import com.te.lmsproject.emailservice.EmailServices;
 import com.te.lmsproject.repository.admin.Batch;
 import com.te.lmsproject.repository.admin.Mentor;
 import com.te.lmsproject.repository.admin.Request;
 import com.te.lmsproject.repository.employee.Employee;
 import com.te.lmsproject.repository.util.Technologies;
 import com.te.lmsproject.repository.util.UserInfo;
+import com.te.lmsproject.service.emailservice.EmailServices;
 
 @Service
 public class AdminServiceImpl implements AdminService {

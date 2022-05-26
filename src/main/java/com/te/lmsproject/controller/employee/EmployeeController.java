@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.te.lmsproject.customexception.DataViolationException;
 import com.te.lmsproject.dto.employee.AddEmployeeDto;
 import com.te.lmsproject.dto.util.ChangePasswordDto;
 import com.te.lmsproject.repository.employee.Employee;

@@ -16,7 +16,6 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.te.lmsproject.enums.BloodGroup;
-import com.te.lmsproject.enums.EmplyoeeStatus;
 import com.te.lmsproject.enums.Gender;
 import com.te.lmsproject.enums.Nationality;
 import com.te.lmsproject.repository.mentor.Attendance;
@@ -51,9 +50,7 @@ public class Employee {
 	@Enumerated(EnumType.STRING)
 	private Nationality nationality;
 
-	@Enumerated(EnumType.STRING)
-	private EmplyoeeStatus status;
-
+	private String status;
 
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
@@ -79,7 +76,7 @@ public class Employee {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Contact> contacts;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JsonManagedReference
 	private List<MockRatings> mockDetails;
 

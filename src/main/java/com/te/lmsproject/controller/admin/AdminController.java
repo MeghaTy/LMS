@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.te.lmsproject.customexception.DataViolationException;
-import com.te.lmsproject.customexception.DuplicateDataException;
 import com.te.lmsproject.dto.admin.AddBatchDto;
 import com.te.lmsproject.dto.admin.AddMentorDto;
 import com.te.lmsproject.dto.admin.AdminBatchDispalyDto;
@@ -73,7 +71,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/batch/{batchId}")
-	public ResponseEntity<ResponseBody> getBatch(@PathVariable Integer batchId) throws Exception {
+	public ResponseEntity<ResponseBody> getBatch(@PathVariable Integer batchId)  {
 		Batch mentor = adminService.getBatch(batchId);
 		if (mentor != null) {
 			return new ResponseEntity<>(new ResponseBody(false, FETCHED, mentor), HttpStatus.OK);

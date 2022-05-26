@@ -10,8 +10,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.te.lmsproject.enums.BloodGroup;
-import com.te.lmsproject.enums.EmplyoeeStatus;
 import com.te.lmsproject.enums.Gender;
 import com.te.lmsproject.enums.Nationality;
 import com.te.lmsproject.repository.employee.Address;
@@ -59,10 +59,8 @@ public class AddEmployeeDto {
 	@NotNull(message = "Gender is missing")
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-	@NotEmpty(message =  "Employee status cannot not be empty")
-	@NotNull(message = "Employee status is missing")
-	@Enumerated(EnumType.STRING)
-	private EmplyoeeStatus status;
+	@JsonIgnore
+	private String status;
 
 	private SecondaryInfo secondaryInfo;
 

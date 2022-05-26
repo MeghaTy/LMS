@@ -6,6 +6,7 @@ import com.te.lmsproject.dto.mentor.AddMockDto;
 import com.te.lmsproject.dto.mentor.AddMockRatingsDto;
 import com.te.lmsproject.dto.mentor.AttendanceDto;
 import com.te.lmsproject.dto.mentor.EmployeeDisplayInMentorModDto;
+import com.te.lmsproject.dto.mentor.EmployeeStatusChangeByMentor;
 import com.te.lmsproject.dto.mentor.MentorBatchResDto;
 import com.te.lmsproject.dto.util.ChangePasswordDto;
 import com.te.lmsproject.dto.util.DropDownDto;
@@ -33,6 +34,7 @@ public interface MentorService {
 
 	public String changePassword(ChangePasswordDto dto);
 
+	public String  mentorChangeEmployeeStatus(EmployeeStatusChangeByMentor dto);
 
 	
 }

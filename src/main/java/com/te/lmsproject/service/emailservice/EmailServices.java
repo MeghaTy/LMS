@@ -1,4 +1,4 @@
-package com.te.lmsproject.emailservice;
+package com.te.lmsproject.service.emailservice;
 
 
 	import java.util.UUID;

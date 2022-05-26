@@ -17,6 +17,7 @@ import com.te.lmsproject.dto.mentor.AddMockDto;
 import com.te.lmsproject.dto.mentor.AddMockRatingsDto;
 import com.te.lmsproject.dto.mentor.AttendanceDto;
 import com.te.lmsproject.dto.mentor.EmployeeDisplayInMentorModDto;
+import com.te.lmsproject.dto.mentor.EmployeeStatusChangeByMentor;
 import com.te.lmsproject.dto.mentor.MentorBatchResDto;
 import com.te.lmsproject.dto.util.ChangePasswordDto;
 import com.te.lmsproject.dto.util.DropDownDto;
@@ -91,7 +92,7 @@ public class MentorController {
 		return new ResponseEntity<>(new ResponseBody(false, "Attendance Updated", attendance), HttpStatus.OK);
 	}
 
-	@PostMapping("/changepassword")
+	@PostMapping("/password")
 	public ResponseEntity<ResponseBody> changePassword(@RequestBody ChangePasswordDto passwordDTO) {
 		String changePassword = mentorService.changePassword(passwordDTO);
 		if (changePassword != null) {
@@ -99,6 +100,18 @@ public class MentorController {
 		} else {
 			return new ResponseEntity<>(new ResponseBody(true, "something went wrong", null), HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@PostMapping("/status")
+	public ResponseEntity<ResponseBody> mentorChangeEmployeeStatus(@RequestBody EmployeeStatusChangeByMentor dto) {
+		 String status = mentorService.mentorChangeEmployeeStatus(dto);
+		
+		if (status !=null) {
+			return new ResponseEntity<>(new ResponseBody(false, "status changed", status), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(new ResponseBody(true, "something went wrong", null), HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 
 }

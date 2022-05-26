@@ -20,6 +20,7 @@ import com.te.lmsproject.dto.mentor.AddMockDto;
 import com.te.lmsproject.dto.mentor.AddMockRatingsDto;
 import com.te.lmsproject.dto.mentor.AttendanceDto;
 import com.te.lmsproject.dto.mentor.EmployeeDisplayInMentorModDto;
+import com.te.lmsproject.dto.mentor.EmployeeStatusChangeByMentor;
 import com.te.lmsproject.dto.mentor.MentorBatchResDto;
 import com.te.lmsproject.dto.util.ChangePasswordDto;
 import com.te.lmsproject.dto.util.DropDownDto;
@@ -90,6 +91,7 @@ public class MentorServiceImpl implements MentorService {
 	public List<EmployeeDisplayInMentorModDto> getstatus(Integer batchId) {
 		Batch batchDetails = batchDao.findByBatchId(batchId);
 		List<Employee> employee = batchDetails.getEmployee();
+		
 		List<EmployeeDisplayInMentorModDto> displayInMentorMod = new ArrayList<>();
 		for (Employee emp : employee) {
 			EmployeeDisplayInMentorModDto mod = new EmployeeDisplayInMentorModDto();
@@ -97,6 +99,7 @@ public class MentorServiceImpl implements MentorService {
 			mod.setEmployeeName(emp.getEmployeeName());
 			mod.setMocksTaken(emp.getMockDetails().size());
 			mod.setStatus(emp.getStatus());
+			mod.setMockRatings(emp.getMockDetails());
 			mod.setAttendance(emp.getAttendances().size());
 			displayInMentorMod.add(mod);
 		}
@@ -207,6 +210,14 @@ public class MentorServiceImpl implements MentorService {
 		}else {
 			return "Password Did not update";
 		}
+	}
+
+	@Override
+	public String mentorChangeEmployeeStatus(EmployeeStatusChangeByMentor dto) {
+		Employee employee = employeeDao.findByEmployeeId(dto.getEmployeeId());
+		employee.setStatus(dto.getStatus());
+		employeeDao.save(employee);
+		return dto.getStatus();
 	}
 
 }
