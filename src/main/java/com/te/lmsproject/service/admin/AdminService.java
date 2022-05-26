@@ -2,8 +2,6 @@ package com.te.lmsproject.service.admin;
 
 import java.util.List;
 
-import com.te.lmsproject.customexception.DataViolationException;
-import com.te.lmsproject.customexception.DuplicateDataException;
 import com.te.lmsproject.dto.admin.AddBatchDto;
 import com.te.lmsproject.dto.admin.AddMentorDto;
 import com.te.lmsproject.dto.admin.AdminBatchDispalyDto;

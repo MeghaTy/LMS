@@ -55,6 +55,7 @@ class AdminServiceImplTest {
 		batch.setBatchName("abc");
 		Mentor mentor = new Mentor();
 		mentor.setMentorName("abc");
+		mentor.setStatus("ACTIVE");
 		batch.setMentor(mentor);
 		List<Technologies> findAllById = new ArrayList<Technologies>();
 		Technologies technologies= new Technologies();
@@ -72,4 +73,15 @@ class AdminServiceImplTest {
 				Batch batch2 =adminServiceImpl.addBatch(batchDto) ;
 				assertEquals("abc", batch2.getBatchName());
 	}
+
+@Test
+ void getBatchTest() {
+	Batch batch = new Batch();
+	batch.setBatchId(1);
+	batch.setBatchName("abc");
+	Mockito.when(batchDao.findByBatchId(1)).thenReturn(batch);
+	Batch batch2= adminServiceImpl.getBatch(1);
+	assertEquals(1, batch2.getBatchId());
+}
+
 }

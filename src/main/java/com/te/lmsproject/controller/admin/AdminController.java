@@ -40,8 +40,8 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	private final String FAILURE ="Failure";
-	private final String FETCHED = "Data Fetched Successfully";
+	private static final String FAILURE ="Failure";
+	private static final String FETCHED = "Data Fetched Successfully";
 	
 
 	@PostMapping("/batch/")
