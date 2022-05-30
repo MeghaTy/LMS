@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 
 import com.te.lmsproject.customexception.DataViolationException;
 import com.te.lmsproject.customexception.DuplicateDataException;
+import com.te.lmsproject.dao.UserInfoRepo;
 import com.te.lmsproject.dao.admin.MentorDao;
 import com.te.lmsproject.dao.admin.RequestDao;
 import com.te.lmsproject.dao.employee.EmployeeDao;
-import com.te.lmsproject.dao.util.UserInfoRepo;
+import com.te.lmsproject.dto.ChangePasswordDto;
 import com.te.lmsproject.dto.employee.AddEmployeeDto;
-import com.te.lmsproject.dto.util.ChangePasswordDto;
-import com.te.lmsproject.repository.admin.Mentor;
-import com.te.lmsproject.repository.admin.Request;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.mentor.MockRatings;
-import com.te.lmsproject.repository.util.UserInfo;
+import com.te.lmsproject.entity.admin.Mentor;
+import com.te.lmsproject.entity.admin.Request;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.mentor.MockRatings;
+import com.te.lmsproject.entity.util.UserInfo;
 
 @Service
 public class EmployeeServiceImple implements EmployeeService {

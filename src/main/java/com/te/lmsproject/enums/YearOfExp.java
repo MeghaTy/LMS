@@ -9,5 +9,9 @@ public enum YearOfExp {
 		this.type = type;
 	}
 
+	public Integer getType() {
+		return type;
+	}
+
 
 }

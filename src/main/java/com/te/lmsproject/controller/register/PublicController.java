@@ -9,17 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.te.lmsproject.dto.employee.AddEmployeeDto;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.util.ResponseBody;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.util.ResponseBody;
 import com.te.lmsproject.service.employee.EmployeeService;
 
 @RestController
-@RequestMapping("lms/api/public")
+@RequestMapping("api/public")
 public class PublicController {
 
 	@Autowired
 	EmployeeService service;
 	
+	/**
+	 * 
+	 * @param employee
+	 * 
+	 * Employee Register
+	 */
 	@PostMapping("/")
 	public ResponseEntity<ResponseBody> register(@RequestBody AddEmployeeDto employee){
 		Employee addEmployee = service.saveEmp(employee);

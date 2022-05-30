@@ -5,6 +5,10 @@ public enum MaritalStatus {
 	
 	private final String status;
 	
+	public String getStatus() {
+		return status;
+	}
+
 	MaritalStatus(String status){
 		this.status=status;
 	}

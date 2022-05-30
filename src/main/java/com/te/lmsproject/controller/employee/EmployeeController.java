@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.te.lmsproject.dto.ChangePasswordDto;
 import com.te.lmsproject.dto.employee.AddEmployeeDto;
-import com.te.lmsproject.dto.util.ChangePasswordDto;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.mentor.MockRatings;
-import com.te.lmsproject.repository.util.ResponseBody;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.mentor.MockRatings;
+import com.te.lmsproject.entity.util.ResponseBody;
 import com.te.lmsproject.service.employee.EmployeeService;
 
 @RestController
@@ -28,6 +28,14 @@ public class EmployeeController {
 
 	@Autowired
 	EmployeeService employeeService;
+	
+	/**
+	 * 
+	 * @param employee
+	 * 
+	 * Update Employee Details
+	 * 
+	 */
 
 	@PutMapping("/employee")
 	public ResponseEntity<ResponseBody> updateEmp(@RequestBody AddEmployeeDto employee){
@@ -41,6 +49,13 @@ public class EmployeeController {
 	}
 
 
+	/**
+	 * 
+	 * @param employeeName
+	 * 
+	 * Fetch Employee details with respect to employeeName
+	 * 
+	 */
 	@GetMapping("/employee/{empName}")
 	public ResponseEntity<ResponseBody> getEmpDetails(@PathVariable String empName) {
 		Employee empDetails = employeeService.getEmpDetails(empName);
@@ -51,7 +66,13 @@ public class EmployeeController {
 		}
 
 	}
+	
+	
 
+	/**
+	 * Fetch All Employee details
+	 * 
+	 */
 	@GetMapping("/employees")
 	public ResponseEntity<ResponseBody> getAllEmpDetails() {
 		List<Employee> empDetails = employeeService.getAllEmp();
@@ -63,6 +84,13 @@ public class EmployeeController {
 
 	}
 
+	/**
+	 * 
+	 * @param empName
+	 *
+	 * Fetch Mock Ratings with respect to employeeName
+	 *
+	 */
 	@GetMapping("/mockratings/{empName}")
 	public ResponseEntity<ResponseBody> getMockRating(@PathVariable String empName){
 		List<MockRatings> mockDetails = employeeService.getMockDetails(empName);
@@ -74,7 +102,14 @@ public class EmployeeController {
 		}
 	}
 	
-	@PostMapping("/changepassword")
+	
+	/**
+	 * 
+	 * @param passwordDTO
+	 * 
+	 * Employee Password change
+	 */
+	@PostMapping("/password")
 	public ResponseEntity<ResponseBody> changePassword(@RequestBody ChangePasswordDto passwordDTO) {
 		String changePassword = employeeService.changePassword(passwordDTO);
 		if (changePassword != null) {

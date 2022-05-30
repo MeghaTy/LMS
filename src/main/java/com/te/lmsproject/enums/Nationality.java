@@ -8,6 +8,10 @@ public enum Nationality {
 	Nationality(String nation ){
 		this.nation=nation;
 	}
+
+	public String getNation() {
+		return nation;
+	}
 	
 
 }

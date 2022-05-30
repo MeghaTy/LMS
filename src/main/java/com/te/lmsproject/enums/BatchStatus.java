@@ -5,6 +5,10 @@ public enum BatchStatus {
 	
 	private final String status;
 	
+	public String getStatus() {
+		return status;
+	}
+
 	BatchStatus(String status){
 		this.status=status;
 	}

@@ -8,6 +8,10 @@ public enum MockType {
 	MockType(String type){
 		this.type=type;
 	}
+
+	public String getType() {
+		return type;
+	}
 	
 
 }

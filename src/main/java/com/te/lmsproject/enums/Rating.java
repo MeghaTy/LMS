@@ -9,6 +9,12 @@ public enum Rating {
 	Rating(String ratings){
 		this.ratings=ratings;
 	}
+
+
+	public String getRatings() {
+		return ratings;
+	}
+	
 }
 
 

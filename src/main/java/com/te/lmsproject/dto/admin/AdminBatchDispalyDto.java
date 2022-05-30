@@ -7,8 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.te.lmsproject.entity.util.Technologies;
 import com.te.lmsproject.enums.BatchStatus;
-import com.te.lmsproject.repository.util.Technologies;
 
 import lombok.Getter;
 import lombok.Setter;

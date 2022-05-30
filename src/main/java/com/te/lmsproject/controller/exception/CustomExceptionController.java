@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.te.lmsproject.customexception.DataViolationException;
 import com.te.lmsproject.customexception.DuplicateDataException;
-import com.te.lmsproject.repository.util.ResponseBody;
+import com.te.lmsproject.entity.util.ResponseBody;
 
 @ControllerAdvice
 public class CustomExceptionController {

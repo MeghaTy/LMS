@@ -9,29 +9,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.te.lmsproject.customexception.DataViolationException;
+import com.te.lmsproject.dao.TechnologyDao;
+import com.te.lmsproject.dao.UserInfoRepo;
 import com.te.lmsproject.dao.admin.BatchDao;
 import com.te.lmsproject.dao.admin.MentorDao;
 import com.te.lmsproject.dao.employee.EmployeeDao;
 import com.te.lmsproject.dao.mentor.AttendaceDao;
 import com.te.lmsproject.dao.mentor.MockRatingDao;
-import com.te.lmsproject.dao.util.TechnologyDao;
-import com.te.lmsproject.dao.util.UserInfoRepo;
+import com.te.lmsproject.dto.ChangePasswordDto;
+import com.te.lmsproject.dto.DropDownDto;
 import com.te.lmsproject.dto.mentor.AddMockDto;
 import com.te.lmsproject.dto.mentor.AddMockRatingsDto;
 import com.te.lmsproject.dto.mentor.AttendanceDto;
 import com.te.lmsproject.dto.mentor.EmployeeDisplayInMentorModDto;
 import com.te.lmsproject.dto.mentor.EmployeeStatusChangeByMentor;
 import com.te.lmsproject.dto.mentor.MentorBatchResDto;
-import com.te.lmsproject.dto.util.ChangePasswordDto;
-import com.te.lmsproject.dto.util.DropDownDto;
-import com.te.lmsproject.repository.admin.Batch;
-import com.te.lmsproject.repository.admin.Mentor;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.mentor.Attendance;
-import com.te.lmsproject.repository.mentor.Mock;
-import com.te.lmsproject.repository.mentor.MockRatings;
-import com.te.lmsproject.repository.util.Technologies;
-import com.te.lmsproject.repository.util.UserInfo;
+import com.te.lmsproject.entity.admin.Batch;
+import com.te.lmsproject.entity.admin.Mentor;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.mentor.Attendance;
+import com.te.lmsproject.entity.mentor.Mock;
+import com.te.lmsproject.entity.mentor.MockRatings;
+import com.te.lmsproject.entity.util.Technologies;
+import com.te.lmsproject.entity.util.UserInfo;
 
 @Service
 public class MentorServiceImpl implements MentorService {

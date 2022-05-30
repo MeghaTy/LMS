@@ -2,6 +2,7 @@ package com.te.lmsproject.service.admin;
 
 import java.util.List;
 
+import com.te.lmsproject.dto.DropDownDto;
 import com.te.lmsproject.dto.admin.AddBatchDto;
 import com.te.lmsproject.dto.admin.AddMentorDto;
 import com.te.lmsproject.dto.admin.AdminBatchDispalyDto;
@@ -9,18 +10,17 @@ import com.te.lmsproject.dto.admin.EmployeeRequestDto;
 import com.te.lmsproject.dto.admin.RejectDto;
 import com.te.lmsproject.dto.admin.RequestApproveDto;
 import com.te.lmsproject.dto.admin.UpdateBatchDto;
-import com.te.lmsproject.dto.util.DropDownDto;
-import com.te.lmsproject.repository.admin.Batch;
-import com.te.lmsproject.repository.admin.Mentor;
-import com.te.lmsproject.repository.admin.Request;
-import com.te.lmsproject.repository.employee.Employee;
+import com.te.lmsproject.entity.admin.Batch;
+import com.te.lmsproject.entity.admin.Mentor;
+import com.te.lmsproject.entity.admin.Request;
+import com.te.lmsproject.entity.employee.Employee;
 
 public interface AdminService {
 	public Batch addBatch(AddBatchDto batchDto) ;
 	
 	public Batch updateBatch(UpdateBatchDto batch);
 	
-	public void deleteBatch(Integer id);
+	public boolean deleteBatch(Integer id);
 	
 	public Batch getBatch(Integer id);
 	

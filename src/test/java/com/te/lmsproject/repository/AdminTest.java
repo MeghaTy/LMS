@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.te.lmsproject.repository.util.Admin;
+import com.te.lmsproject.entity.util.Admin;
 
  class AdminTest {
 

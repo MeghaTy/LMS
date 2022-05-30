@@ -11,12 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.te.lmsproject.customexception.DataViolationException;
 import com.te.lmsproject.customexception.DuplicateDataException;
+import com.te.lmsproject.dao.TechnologyDao;
+import com.te.lmsproject.dao.UserInfoRepo;
 import com.te.lmsproject.dao.admin.BatchDao;
 import com.te.lmsproject.dao.admin.MentorDao;
 import com.te.lmsproject.dao.admin.RequestDao;
 import com.te.lmsproject.dao.employee.EmployeeDao;
-import com.te.lmsproject.dao.util.TechnologyDao;
-import com.te.lmsproject.dao.util.UserInfoRepo;
+import com.te.lmsproject.dto.DropDownDto;
 import com.te.lmsproject.dto.admin.AddBatchDto;
 import com.te.lmsproject.dto.admin.AddMentorDto;
 import com.te.lmsproject.dto.admin.AdminBatchDispalyDto;
@@ -24,13 +25,12 @@ import com.te.lmsproject.dto.admin.EmployeeRequestDto;
 import com.te.lmsproject.dto.admin.RejectDto;
 import com.te.lmsproject.dto.admin.RequestApproveDto;
 import com.te.lmsproject.dto.admin.UpdateBatchDto;
-import com.te.lmsproject.dto.util.DropDownDto;
-import com.te.lmsproject.repository.admin.Batch;
-import com.te.lmsproject.repository.admin.Mentor;
-import com.te.lmsproject.repository.admin.Request;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.util.Technologies;
-import com.te.lmsproject.repository.util.UserInfo;
+import com.te.lmsproject.entity.admin.Batch;
+import com.te.lmsproject.entity.admin.Mentor;
+import com.te.lmsproject.entity.admin.Request;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.util.Technologies;
+import com.te.lmsproject.entity.util.UserInfo;
 import com.te.lmsproject.service.emailservice.EmailServices;
 
 @Service
@@ -113,12 +113,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void deleteBatch(Integer batch) {
+	public boolean deleteBatch(Integer batch) {
 		Batch batchId = batchDao.findByBatchId(batch);
 		if (batchId == null) {
 			throw new DataViolationException(BATCH_MESSAGE);
 		}
 		batchDao.delete(batchId);
+	return true;
+		
 
 	}
 

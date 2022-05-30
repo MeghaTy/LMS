@@ -9,4 +9,9 @@ public enum BloodGroup {
 		this.bGroup=bGroup;
 	}
 
+	public String getbGroup() {
+		return bGroup;
+	}
+	
+
 }

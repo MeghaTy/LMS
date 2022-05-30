@@ -9,4 +9,10 @@ public enum State {
 		this.temp=state;
 	}
 
+	public String getTemp() {
+		return temp;
+	}
+	
+	
+
 }

@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.te.lmsproject.repository.admin.Batch;
-import com.te.lmsproject.repository.util.ResponseBody;
+import com.te.lmsproject.entity.admin.Batch;
+import com.te.lmsproject.entity.util.ResponseBody;
 import com.te.lmsproject.service.admin.AdminServiceImpl;
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest

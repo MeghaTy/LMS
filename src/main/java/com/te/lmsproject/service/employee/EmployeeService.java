@@ -2,10 +2,10 @@ package com.te.lmsproject.service.employee;
 
 import java.util.List;
 
+import com.te.lmsproject.dto.ChangePasswordDto;
 import com.te.lmsproject.dto.employee.AddEmployeeDto;
-import com.te.lmsproject.dto.util.ChangePasswordDto;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.mentor.MockRatings;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.mentor.MockRatings;
 
 public interface EmployeeService {
 	public Employee saveEmp(AddEmployeeDto employee); 

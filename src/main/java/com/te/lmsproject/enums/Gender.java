@@ -8,4 +8,8 @@ public enum Gender {
 		this.temp=gender;
 	}
 
+	public String getTemp() {
+		return temp;
+	}
+
 }

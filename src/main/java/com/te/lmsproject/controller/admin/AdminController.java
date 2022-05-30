@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.te.lmsproject.dto.DropDownDto;
 import com.te.lmsproject.dto.admin.AddBatchDto;
 import com.te.lmsproject.dto.admin.AddMentorDto;
 import com.te.lmsproject.dto.admin.AdminBatchDispalyDto;
@@ -22,12 +23,11 @@ import com.te.lmsproject.dto.admin.EmployeeRequestDto;
 import com.te.lmsproject.dto.admin.RejectDto;
 import com.te.lmsproject.dto.admin.RequestApproveDto;
 import com.te.lmsproject.dto.admin.UpdateBatchDto;
-import com.te.lmsproject.dto.util.DropDownDto;
-import com.te.lmsproject.repository.admin.Batch;
-import com.te.lmsproject.repository.admin.Mentor;
-import com.te.lmsproject.repository.admin.Request;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.util.ResponseBody;
+import com.te.lmsproject.entity.admin.Batch;
+import com.te.lmsproject.entity.admin.Mentor;
+import com.te.lmsproject.entity.admin.Request;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.util.ResponseBody;
 import com.te.lmsproject.service.admin.AdminService;
 
 @RestController
@@ -42,7 +42,13 @@ public class AdminController {
 	private static final String FETCHED = "Data Fetched Successfully";
 	
 
-	@PostMapping("/batch/")
+	/**
+	 * 
+	 * @param batchDTO
+	 * 
+	 * Add Batch 
+	 */
+	@PostMapping("/batch")
 	public ResponseEntity<ResponseBody> addBatch(@RequestBody AddBatchDto batchDTO){
 		Batch addBatch = adminService.addBatch(batchDTO);
 		if (addBatch != null) {
@@ -53,7 +59,13 @@ public class AdminController {
 
 	}
 
-	@PutMapping("/batch/")
+	/**
+	 * 
+	 * @param batchDTO
+	 * 
+	 * Update Batch
+	 */
+	@PutMapping("/batch")
 	public ResponseEntity<ResponseBody> updateBatch(@RequestBody UpdateBatchDto batchDTO){
 		Batch addBatch = adminService.updateBatch(batchDTO);
 		if (addBatch != null) {
@@ -63,13 +75,28 @@ public class AdminController {
 		}
 
 	}
+	
 
+	/**
+	 * 
+	 * @param batchId
+	 * 
+	 * Delete Batch
+	 * 
+	 */
 	@DeleteMapping("/batch/{batchId}")
 	public ResponseEntity<ResponseBody> deleteBatch(@PathVariable Integer batchId) {
 		adminService.deleteBatch(batchId);
 		return new ResponseEntity<>(new ResponseBody(false, "Batch deleted successfully", null), HttpStatus.OK);
 	}
 
+	/**
+	 * 
+	 * @param batchId
+	 * 
+	 * Fetch Batch details with respect to BatchId
+	 * 
+	 */
 	@GetMapping("/batch/{batchId}")
 	public ResponseEntity<ResponseBody> getBatch(@PathVariable Integer batchId)  {
 		Batch mentor = adminService.getBatch(batchId);
@@ -81,17 +108,29 @@ public class AdminController {
 
 	}
 
+	/**
+	 * 
+	 * Fetch all Batch details
+	 * 
+	 */
 	@GetMapping("/batches")
-	public ResponseEntity<ResponseBody> getAllBatch() {
+	public ResponseBody getAllBatch() {
 		List<AdminBatchDispalyDto> mentor = adminService.getAllBatch();
 		if (mentor != null) {
-			return new ResponseEntity<>(new ResponseBody(false, FETCHED, mentor), HttpStatus.OK);
+			return new ResponseBody(false,"sucess",mentor);
 		} else {
-			return new ResponseEntity<>(new ResponseBody(true, FAILURE, null), HttpStatus.BAD_REQUEST);
+			return new ResponseBody(true,"failed",null);
 		}
 
 	}
 
+	/**
+	 * 
+	 * @param addMentor
+	 * 
+	 * Add Mentor
+	 * 
+	 */
 	@PostMapping("/mentor")
 	public ResponseEntity<ResponseBody> addMentor(@RequestBody AddMentorDto addMentor) {
 		Mentor mentor = adminService.addMentor(addMentor);
@@ -103,6 +142,13 @@ public class AdminController {
 
 	}
 
+	/**
+	 * 
+	 * @param addMentor
+	 * 
+	 * Update Mentor
+	 * 
+	 */
 	@PutMapping("/mentor")
 	public ResponseEntity<ResponseBody> updateMentor(@RequestBody AddMentorDto addMentor) {
 		Mentor mentor = adminService.updateMentor(addMentor);
@@ -113,9 +159,16 @@ public class AdminController {
 		}
 
 	}
-
+	
+	/**
+	 * 
+	 * @param empId
+	 * 
+	 * Fetch mentor details with respect to employeeId
+	 * 
+	 */
 	@GetMapping("/mentor/{empId}")
-	public ResponseEntity<ResponseBody> getBatch(@PathVariable String empId)  {
+	public ResponseEntity<ResponseBody> getMentor(@PathVariable String empId)  {
 		Mentor mentor = adminService.getMentor(empId);
 		if (mentor != null) {
 			return new ResponseEntity<>(new ResponseBody(false, FETCHED, mentor), HttpStatus.OK);
@@ -125,6 +178,10 @@ public class AdminController {
 
 	}
 
+	/**
+	 * Fetch all mentors
+	 * 
+	 */
 	@GetMapping("/mentors")
 	public ResponseEntity<ResponseBody> getAllMentor() {
 		List<Mentor> mentor = adminService.geAlltMentor();
@@ -136,12 +193,23 @@ public class AdminController {
 
 	}
 
+	/**
+	 * 
+	 * @param empId
+	 * 
+	 * Delete mentor with respect to employeeId
+	 * 
+	 */
 	@PutMapping("/mentor/{empId}")
 	public ResponseEntity<ResponseBody> deleteMentor(@PathVariable String empId) {
 		adminService.deleteMentor(empId);
 		return new ResponseEntity<>(new ResponseBody(false, "Mentor deleted successfully", null), HttpStatus.OK);
 	}
 
+	/**
+	 * Employee Request 
+	 * 
+	 */
 	@GetMapping("/requests")
 	public ResponseEntity<ResponseBody> getRequest() {
 		List<EmployeeRequestDto> request = adminService.getAllRequest();
@@ -152,6 +220,13 @@ public class AdminController {
 		}
 	}
 
+	/**
+	 * 
+	 * @param approve
+	 * 
+	 * Employee Approve Request
+	 * 
+	 */
 	@PostMapping("/request")
 	public ResponseEntity<ResponseBody> approveRequest(@RequestBody RequestApproveDto approve)  {
 		List<Employee> request = adminService.approveRequest(approve);
@@ -162,6 +237,12 @@ public class AdminController {
 		}
 	}
 
+	/**
+	 * 
+	 * @param reject
+	 * 
+	 * Employee Reject request
+	 */
 	@PostMapping("/reject")
 	public ResponseEntity<ResponseBody> rejectRequest(@RequestBody RejectDto reject) {
 		List<Request> request = adminService.rejectRequest(reject);
@@ -169,6 +250,11 @@ public class AdminController {
 
 	}
 
+	/**
+	 * 
+	 * Mentor Drop down
+	 * 
+	 */
 	@GetMapping("/mentorname/dropdown")
 	public ResponseEntity<ResponseBody> getMentorDropDown() {
 		List<DropDownDto> mentorName = adminService.getMentorName();
@@ -180,6 +266,10 @@ public class AdminController {
 		}
 	}
 
+	/**
+	 * 
+	 * Batch drop down 
+	 */
 	@GetMapping("/batch/dropdwon")
 	public ResponseEntity<ResponseBody> getBatchId() {
 		List<DropDownDto> batchId = adminService.getBatchId();

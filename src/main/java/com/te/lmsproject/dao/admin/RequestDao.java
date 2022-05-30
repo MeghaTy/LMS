@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.te.lmsproject.repository.admin.Request;
+import com.te.lmsproject.entity.admin.Request;
 
 @Repository
 public interface RequestDao extends JpaRepository<Request, Integer> {

@@ -13,14 +13,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.te.lmsproject.dao.UserInfoRepo;
 import com.te.lmsproject.dao.admin.MentorDao;
 import com.te.lmsproject.dao.admin.RequestDao;
 import com.te.lmsproject.dao.employee.EmployeeDao;
-import com.te.lmsproject.dao.util.UserInfoRepo;
 import com.te.lmsproject.dto.employee.AddEmployeeDto;
-import com.te.lmsproject.repository.admin.Request;
-import com.te.lmsproject.repository.employee.Address;
-import com.te.lmsproject.repository.employee.Employee;
+import com.te.lmsproject.entity.admin.Request;
+import com.te.lmsproject.entity.employee.Address;
+import com.te.lmsproject.entity.employee.Employee;
 import com.te.lmsproject.service.employee.EmployeeServiceImple;
 @ExtendWith(MockitoExtension.class)
 class EmployeeServiceImpleTest {

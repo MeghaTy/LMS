@@ -2,17 +2,17 @@ package com.te.lmsproject.service.mentor;
 
 import java.util.List;
 
+import com.te.lmsproject.dto.ChangePasswordDto;
+import com.te.lmsproject.dto.DropDownDto;
 import com.te.lmsproject.dto.mentor.AddMockDto;
 import com.te.lmsproject.dto.mentor.AddMockRatingsDto;
 import com.te.lmsproject.dto.mentor.AttendanceDto;
 import com.te.lmsproject.dto.mentor.EmployeeDisplayInMentorModDto;
 import com.te.lmsproject.dto.mentor.EmployeeStatusChangeByMentor;
 import com.te.lmsproject.dto.mentor.MentorBatchResDto;
-import com.te.lmsproject.dto.util.ChangePasswordDto;
-import com.te.lmsproject.dto.util.DropDownDto;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.mentor.Mock;
-import com.te.lmsproject.repository.mentor.MockRatings;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.mentor.Mock;
+import com.te.lmsproject.entity.mentor.MockRatings;
 
 public interface MentorService {
 

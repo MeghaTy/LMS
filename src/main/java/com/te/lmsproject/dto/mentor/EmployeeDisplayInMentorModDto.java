@@ -1,7 +1,9 @@
 package com.te.lmsproject.dto.mentor;
 
 import java.util.List;
-import com.te.lmsproject.repository.mentor.MockRatings;
+
+import com.te.lmsproject.entity.mentor.MockRatings;
+
 import lombok.Getter;
 import lombok.Setter;
 

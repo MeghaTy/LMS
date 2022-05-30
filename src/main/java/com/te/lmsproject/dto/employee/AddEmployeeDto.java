@@ -11,16 +11,16 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.te.lmsproject.entity.employee.Address;
+import com.te.lmsproject.entity.employee.BankDetails;
+import com.te.lmsproject.entity.employee.Contact;
+import com.te.lmsproject.entity.employee.EducationalInfo;
+import com.te.lmsproject.entity.employee.Experience;
+import com.te.lmsproject.entity.employee.SecondaryInfo;
+import com.te.lmsproject.entity.employee.TechnicalSkill;
 import com.te.lmsproject.enums.BloodGroup;
 import com.te.lmsproject.enums.Gender;
 import com.te.lmsproject.enums.Nationality;
-import com.te.lmsproject.repository.employee.Address;
-import com.te.lmsproject.repository.employee.BankDetails;
-import com.te.lmsproject.repository.employee.Contact;
-import com.te.lmsproject.repository.employee.EducationalInfo;
-import com.te.lmsproject.repository.employee.Experience;
-import com.te.lmsproject.repository.employee.SecondaryInfo;
-import com.te.lmsproject.repository.employee.TechnicalSkill;
 
 import lombok.Getter;
 import lombok.Setter;

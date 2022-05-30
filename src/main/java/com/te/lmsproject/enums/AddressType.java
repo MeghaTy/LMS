@@ -9,4 +9,10 @@ public enum AddressType {
 		this.address=address;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+	
+	
+
 }

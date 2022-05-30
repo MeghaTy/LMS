@@ -23,8 +23,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.te.lmsproject.repository.employee.Employee;
-import com.te.lmsproject.repository.util.ResponseBody;
+import com.te.lmsproject.entity.employee.Employee;
+import com.te.lmsproject.entity.util.ResponseBody;
 import com.te.lmsproject.service.employee.EmployeeService;
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
